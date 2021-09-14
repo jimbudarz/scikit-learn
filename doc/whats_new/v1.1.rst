@@ -84,6 +84,16 @@ Changelog
 - |API| Adds :meth:`get_feature_names_out` to :class:`impute.SimpleImputer`,
   :class:`impute.KNNImputer`, :class:`impute.IterativeImputer`, and
   :class:`impute.MissingIndicator`. :pr:`21078` by `Thomas Fan`_.
+:mod:`sklearn.inspection`
+.........................
+
+- |Feature| Add `custom_grid` parameter in
+  :func:`inspection.partial_dependence`. It enables users to pass their own grid
+    of values at which the partial dependence should be calculated.
+  :pr:`21033` by :user:`Freddy A. Boulton <freddyaboulton>`.
+
+:mod:`sklearn.utils`
+....................
 
 - |Fix| Fix a bug in :class:`linear_model.RidgeClassifierCV` where the method
   `predict` was performing an `argmax` on the scores obtained from
