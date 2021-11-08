@@ -33,6 +33,7 @@ jobs:
     THREADPOOLCTL_VERSION: 'latest'
     COVERAGE: 'true'
     TEST_DOCSTRINGS: 'false'
+    SHOW_SHORT_SUMMARY: 'false'
   strategy:
     matrix:
       ${{ insert }}: ${{ parameters.matrix }}
@@ -58,6 +59,10 @@ jobs:
     - script: |
         build_tools/azure/test_docs.sh
       displayName: 'Test Docs'
+    - script: |
+        build_tools/azure/test_docstring.sh
+      displayName: "Numpydoc validation"
+      condition: eq(variables['TEST_DOCSTRINGS'], 'true')
     - script: |
         build_tools/azure/test_pytest_soft_dependency.sh
       displayName: 'Test Soft Dependency'
