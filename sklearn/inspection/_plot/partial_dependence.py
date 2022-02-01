@@ -44,6 +44,7 @@ def plot_partial_dependence(
     kind="average",
     subsample=1000,
     random_state=None,
+    custom_values=None,
 ):
     """Partial dependence (PD) and individual conditional expectation (ICE)
     plots.
@@ -263,6 +264,11 @@ def plot_partial_dependence(
 
         .. versionadded:: 0.24
 
+    custom_values: dict
+        A dictionary mapping the index of an element of `features` to an array of values where
+        the partial dependence should be calculated for that feature. Setting a range
+        of values for a feature overrides `grid_resolution` and `percentiles`.
+
     Returns
     -------
     display : :class:`~sklearn.inspection.PartialDependenceDisplay`
@@ -307,6 +313,7 @@ def plot_partial_dependence(
         kind=kind,
         subsample=subsample,
         random_state=random_state,
+        custom_values=custom_values,
     )
 
 
@@ -333,6 +340,7 @@ def _plot_partial_dependence(
     kind="average",
     subsample=1000,
     random_state=None,
+    custom_values=None,
 ):
     """See PartialDependenceDisplay.from_estimator for details"""
     import matplotlib.pyplot as plt  # noqa
@@ -443,6 +451,7 @@ def _plot_partial_dependence(
             grid_resolution=grid_resolution,
             percentiles=percentiles,
             kind=kind,
+            custom_values=custom_values,
         )
         for fxs in features
     )
@@ -686,6 +695,7 @@ class PartialDependenceDisplay:
         kind="average",
         subsample=1000,
         random_state=None,
+        custom_values=None,
     ):
         """Partial dependence (PD) and individual conditional expectation (ICE) plots.
 
@@ -889,6 +899,11 @@ class PartialDependenceDisplay:
             `None` and `kind` is either `'both'` or `'individual'`.
             See :term:`Glossary <random_state>` for details.
 
+        custom_values : dict
+            A dictionary mapping the index of an element of `features` to an array of values where
+            the partial dependence should be calculated for that feature. Setting a range
+            of values for a feature overrides `grid_resolution` and `percentiles`.
+
         Returns
         -------
         display : :class:`~sklearn.inspection.PartialDependenceDisplay`
@@ -931,6 +946,7 @@ class PartialDependenceDisplay:
             kind=kind,
             subsample=subsample,
             random_state=random_state,
+            custom_values=custom_values,
         )
 
     def _get_sample_count(self, n_samples):
